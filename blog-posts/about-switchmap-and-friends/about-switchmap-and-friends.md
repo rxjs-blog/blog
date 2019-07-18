@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "About switchMap and friends"
 cover_image: ""
 description: "This blog article covers the details about the RxJS switchMap operator, but also mergeMap, concatMap and exhaustMap."
