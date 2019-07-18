@@ -8,8 +8,6 @@ series:
 canonical_url:
 ---
 
-# About switchMap and friends
-
 RxJS comes with more than 100 different operators. [SwitchMap](https://rxjs.dev/api/operators/switchMap) is probably the one that is discussed the most often. It's a very powerful operator, being very useful in many situations, but it's also quite a dangerous one. In this blog article, we will talk about `switchMap` and also covers the issues it might introduce to your application. Additionally, we will cover the operators having a similar use case. This will make it easier for you, the next time you need to pick one of those.
 
 Before we start talking about the dos and don'ts of using `switchMap`, let's first summarize the way `switchMap` is working. SwitchMap is a so-called higher-order operator. Maybe you are already familiar with the concept of higher-order functions because it's quite similar.
