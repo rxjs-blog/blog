@@ -4,6 +4,17 @@
     "type": "git",
     "url": "https://github.com/JWO719/DEV-rxjs.git"
   },
+  "lint-staged": {
+    "blog-posts/**/*.{js,json,scss,md,ts,html,component.html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "scripts": {
     "prettier": "prettier",
     "embedme": "embedme blog-posts/**/*.md",
@@ -17,6 +28,8 @@
   "dependencies": {
     "dev-to-git": "1.1.0",
     "embedme": "1.11.0",
+    "husky": "^3.0.1",
+    "lint-staged": "^9.2.0",
     "prettier": "1.18.2"
   }
 }
