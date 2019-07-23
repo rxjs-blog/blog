@@ -1,4 +1,12 @@
-# The Finalize Operator
+---
+published: true
+title: "Handling animations properly with the RxJS finalize operator"
+cover_image: ""
+description: "Interested in knowing how to use the RxJS finalize operator for handling animations on subscription events?"
+tags: rxjs, javascript, typescript, finalize
+series:
+canonical_url:
+---
 
 I was building an Angular application recently which had to request for data from an API. Since I was using the Angular HttpClient, the response for the data request was wrapped in an observable by default.
 
