@@ -2,7 +2,7 @@
   "name": "dev.to",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JWO719/DEV-rxjs.git"
+    "url": "https://github.com/rxjs-blog/blog"
   },
   "lint-staged": {
     "blog-posts/**/*.{js,json,scss,md,ts,html,component.html}": [
