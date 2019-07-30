@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: "takeWhile, takeUntil, takeWhat?"
 cover_image: ""
 description: "The RxJS TakeWhile and TakeUntil operator already sound similar and behave similarly. So what's the difference?"
@@ -77,3 +77,14 @@ For such a scenario, where we use the incoming will, to determine wether we want
 - use takeUntil when there is an outer event determine that you want to unsubscribe
 - use both of them as the last operator in your `Observable` pipeline
   - [There's a tslint rule for that](https://github.com/cartant/rxjs-tslint-rules)
+
+## Special Thanks
+
+I'm really thankful for all the amazing people helped me writing this blog posts.
+This goes out to:
+ - [Jordy Langen](https://twitter.com/Jordy_Langen)
+ - [Michael Hladky](https://twitter.com/Michael_Hladky)
+ - [Tim Deschryver](https://twitter.com/tim_deschryver)
+ - [Tobias Struckmeier](https://twitter.com/tobmaster)
+ - [Manfred Steyer](https://twitter.com/ManfredSteyer)
+ - [Sander Elias](https://twitter.com/esosanderelias)
