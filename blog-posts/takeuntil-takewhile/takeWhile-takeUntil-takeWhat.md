@@ -13,54 +13,18 @@ There are several ways to do this. In several projects, I stumbled across a mixt
 
 ## About takeWhile
 
-Well, let's take a look at a quick example. The first code snippet we are looking at is using `takeWhile` to unsubscribe from an `Observable`. I used an Angular Component here, to couple the lifecycle of the `Observable` to the lifecycle of the component.
-Short disclaimer: It doesn't necessarily need to be an Angular component, it's just the framework I'm the most familiar with.
+Well, let's take a look at a quick example. The first code snippet we are looking at is using `takeWhile` to unsubscribe from an `Observable`. 
 
-```ts
-@Component({...})
-export class MyComponent implements OnInit, OnDestroy {
+{% stackblitz rxjs-dev-takewhile %}
 
-  private alive = true;
-
-  public ngOnInit() {
-    myAwesomeObservable$.pipe(
-      takeWhile(val => this.alive)
-    ).subscribe();
-  }
-
-  public ngOnDestroy() {
-    this.alive = false;
-  }
-
-}
-```
-
-In this code snippet, we have a class property describing the state of the `Observable`. It's passed to the `takeWhile` operator and as soon as this property turns false the `Observable` should be unsubscribed from.
-This way of handling subscription is quite imperative and therefore seems to be easier for people to understand.
+In this example I have two different `Observables`. The first is created using the [interval operator](https://rxjs.dev/api/index/function/interval). This will emit notifications till the condition passed to `takeWhile` is falsy. Inside the `takeWhile` we use a boolean variable describing if the user has already clicked or not. As soon has one clicks somewhere in the screen, we unsubscribe from our `interval`-Observable. To determine if the user already clicked we used a second `Observable` created with the [fromEvent operator](https://rxjs.dev/api/index/function/fromEvent). Additionally we used the [tap operator](https://rxjs.dev/api/operators/tap), to log the notifications in the console. We can see that our Observable is unsubscribed as soon as there is no new log coming in.  
 
 ## About takeUntil
 
-```ts
-@Component({...})
-export class MyComponent implements OnInit, OnDestroy {
+{% stackblitz rxjs-dev-takeuntil %}
 
-  private destroyed = new Subject();
-
-  public ngOnInit() {
-    myAwesomeObservable$.pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe();
-  }
-
-  public ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.complete();
-  }
-}
-```
-
-From a high-level perspective, the code snippets don't look that different. Instead of having a boolean property, describing the state of our `Observable`, we now use a `Subject`.
-We pass the `Subject` instance to the `takeUntil` operator and as soon as we want to unsubscribe from our `Observable` we emit a notification over our `Subject` with the `next` method. The call of the `complete` method isn't necessary for this example, but it is a good practice within the `takeUntil`-Pattern.
+From a high-level perspective, the code snippets don't look that different. Instead of having a boolean property, describing the state of our `Observable`, we now directly used the `click`-Observable.
+We pass this `Observable` instance to the `takeUntil` operator and as soon as the user clicks somewhere, our `interval`-Observable will be unsubscribed from. 
 
 ## The Problem
 
