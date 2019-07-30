@@ -13,11 +13,11 @@ There are several ways to do this. In several projects, I stumbled across a mixt
 
 ## About takeWhile
 
-Well, let's take a look at a quick example. The first code snippet we are looking at is using `takeWhile` to unsubscribe from an `Observable`. 
+Well, let's take a look at a quick example. The first code snippet we are looking at is using `takeWhile` to unsubscribe from an `Observable`.
 
 {% stackblitz rxjs-dev-takewhile %}
 
-In this example I have two different `Observables`. The first is created using the [interval operator](https://rxjs.dev/api/index/function/interval). This will emit notifications till the condition passed to `takeWhile` is falsy. Inside the `takeWhile` we use a boolean variable describing if the user has already clicked or not. As soon has one clicks somewhere in the screen, we unsubscribe from our `interval`-Observable. To determine if the user already clicked we used a second `Observable` created with the [fromEvent operator](https://rxjs.dev/api/index/function/fromEvent). Additionally we used the [tap operator](https://rxjs.dev/api/operators/tap), to log the notifications in the console. We can see that our Observable is unsubscribed as soon as there is no new log coming in.  
+In this example I have two different `Observables`. The first is created using the [interval operator](https://rxjs.dev/api/index/function/interval). This will emit notifications till the condition passed to `takeWhile` is falsy. Inside the `takeWhile` we use a boolean variable describing if the user has already clicked or not. As soon has one clicks somewhere in the screen, we unsubscribe from our `interval`-Observable. To determine if the user already clicked we used a second `Observable` created with the [fromEvent operator](https://rxjs.dev/api/index/function/fromEvent). Additionally we used the [tap operator](https://rxjs.dev/api/operators/tap), to log the notifications in the console. We can see that our Observable is unsubscribed as soon as there is no new log coming in.
 
 ## About takeUntil
 
@@ -50,7 +50,7 @@ longLivingObservable$
   .subscribe();
 ```
 
-So what's the issue with this piece of code? Well, our component is already destroyed and due to the needed notification, needed before unsubscribing kicks in, we will start an animation and trigger an HTTP call. This is probably unwanted and just afterwards we will check if we want to unsubscribe from our `Observable`. Besides the fact that those operations are totally superfluous, it also might break our app or pollute our state. 
+So what's the issue with this piece of code? Well, our component is already destroyed and due to the needed notification, needed before unsubscribing kicks in, we will start an animation and trigger an HTTP call. This is probably unwanted and just afterwards we will check if we want to unsubscribe from our `Observable`. Besides the fact that those operations are totally superfluous, it also might break our app or pollute our state.
 
 Additionally, if our `Observable` doesn't emit an additional value, the `takeWhile` will never be triggered and therefore our `Observable` will never be unsubscribed. This can be considered as memory-leak, because our `Observable` stays subscribed.
 
@@ -63,12 +63,10 @@ That's true, you could do this, and you will save the unneeded operations, which
 Don't get me wrong, `takeWhile` is an amazing operator, but just if you actually use the incoming value to determine, whether you want to unsubscribe or not! Do not depend on "global" state, when using `takeWhile`.
 For those scenarios stick to `takeUntil` and use a Subject instance to trigger it.
 
-A real-world use case for `takeWhile` would be a long-polling mechanism. Imagine fetching a resource describing a process. This process can be successfully completed or otherwise ongoing. For sure you just want to continue polling while the process isn't completed yet. The code for such a scenario could look like this. 
+A real-world use case for `takeWhile` would be a long-polling mechanism. Imagine fetching a resource describing a process. This process can be successfully completed or otherwise ongoing. For sure you just want to continue polling while the process isn't completed yet. The code for such a scenario could look like this.
 
 ```ts
-longPolling$.pipe(
-  takeWhile(process => process.completed)
-).subscribe(() => handleNotCompleted());
+longPolling$.pipe(takeWhile(process => process.completed)).subscribe(() => handleNotCompleted());
 ```
 
 For such a scenario, where we use the incoming will, to determine wether we want to stay subscribed or not, `takeWhile` is ideal! If we have an external trigger, stick with `takeUntil`.
