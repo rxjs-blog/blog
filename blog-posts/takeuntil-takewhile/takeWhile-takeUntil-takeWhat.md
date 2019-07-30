@@ -82,9 +82,11 @@ For such a scenario, where we use the incoming will, to determine wether we want
 
 I'm really thankful for all the amazing people helped me writing this blog posts.
 This goes out to:
- - [Jordy Langen](https://twitter.com/Jordy_Langen)
- - [Michael Hladky](https://twitter.com/Michael_Hladky)
- - [Tim Deschryver](https://twitter.com/tim_deschryver)
- - [Tobias Struckmeier](https://twitter.com/tobmaster)
- - [Manfred Steyer](https://twitter.com/ManfredSteyer)
- - [Sander Elias](https://twitter.com/esosanderelias)
+
+- [Jordy Langen](https://twitter.com/Jordy_Langen)
+- [Michael Hladky](https://twitter.com/Michael_Hladky)
+- [Tim Deschryver](https://twitter.com/tim_deschryver)
+- [Tobias Struckmeier](https://twitter.com/tobmaster)
+- [Manfred Steyer](https://twitter.com/ManfredSteyer)
+- [Sander Elias](https://twitter.com/esosanderelias)
+- [Wes Grimes](https://twitter.com/wesgrimes)
