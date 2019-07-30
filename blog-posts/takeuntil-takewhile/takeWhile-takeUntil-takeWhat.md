@@ -24,7 +24,7 @@ In this example I have two different `Observables`. The first is created using t
 {% stackblitz rxjs-dev-takeuntil %}
 
 From a high-level perspective, the code snippets don't look that different. Instead of having a boolean property, describing the state of our `Observable`, we now directly used the `click`-Observable.
-We pass this `Observable` instance to the `takeUntil` operator and as soon as the user clicks somewhere, our `interval`-Observable will be unsubscribed from. 
+We pass this `Observable` instance to the `takeUntil` operator and as soon as the user clicks somewhere, our `interval`-Observable will be unsubscribed from.
 
 ## The Problem
 
@@ -37,7 +37,7 @@ _takeUntil marble diagram, kindly provided by [Michael Hladky](https://twitter.c
 ![takeWhile marble diagram, kindly provided by Michael Hladky](./assets/takeWhile.png)
 _takeWhile marble diagram, kindly provided by [Michael Hladky](https://twitter.com/Michael_Hladky)_
 
-The problem here is that `takeWhile` is intended to take an incoming notification and check a specified condition on it, which might lead to an unsubscribe. The important fact is, that `takeWhile` is triggered by the incoming notification and might unsubscribe afterwards. `takeUntil` in contrast is triggered by the passed `Observable`.
+The problem here is that `takeWhile` is intended to take an incoming notification and check a specified condition on it, which might lead to an unsubscribe. The important fact is, that `takeWhile` is triggered by the incoming notification and might unsubscribe afterwards. In contrast `takeUntil` is triggered by the passed `Observable`.
 That's why `takeWhile` might cause several issues. So definitely, it needs a new notification to unsubscribe. Imagine having a long-living `Observable`. You will need one notification more with `takeWhile` than with `takeUntil`. Also, this additional notification can initiate multiple processes within your `Observable`. Imagine having code like this:
 
 ```ts
