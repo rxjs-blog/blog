@@ -6,5 +6,9 @@
   {
     "id": 146666,
     "relativePathToArticle": "./blog-posts/finalize-operator/finalize-operator.md"
+  },
+  {
+    "id": 150191,
+    "relativePathToArticle": "./blog-posts/takeuntil-takewhile/takeWhile-takeUntil-takeWhat.md"
   }
 ]
