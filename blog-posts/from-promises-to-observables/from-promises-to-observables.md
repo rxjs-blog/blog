@@ -204,7 +204,7 @@ I refactored the HTTP calls to be done in one endpoint. If you look in the examp
 
 The code here is pretty straightforward, based on the "source" parameter it makes a call to the matching RSS feed. The results are gathered from the HTTP call and returned in the output value.
 
-Now for the RxJS implementation, I wrapped each of the HTTP calls to this endpoint in a separate observable. This enabled each call to stream in at the same time, and as soon as results were found they were stored and shown on the page.
+Now for the RxJS implementation, I wrapped each of the HTTP calls to this endpoint in a separate observable. This enabled each HTTP call to start at the same time.  As soon as the individual HTTP calls completed, their responses were shown on the page.
 
 ```ts
   load() {
@@ -309,7 +309,7 @@ The `clear` method stops the stream and clears the array that is shown on screen
 
 ## Marble Diagrams
 
-The code that I've written here resulted in a streamed approach to the RSS calls that I made. It made my application more responsive and made it so I didn't need a spinner and wait experience as I had originally.
+The code that I've written here resulted in a streamed approach to the RSS calls that I made. It made my application more responsive, and I didn't need to show a spinner while the application was waiting for a response.
 
 To understand this behavior, it might be helpful to also have a basic marble diagram. Marble diagram's are great ways to graphically represent RxJS behavior.
 
