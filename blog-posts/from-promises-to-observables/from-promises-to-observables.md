@@ -311,7 +311,7 @@ The `clear` method stops the stream and clears the array that is shown on screen
 
 The code that I've written here resulted in a streamed approach to the RSS calls that I made. It made my application more responsive and made it so I didn't need a spinner and wait experience as I had originally.
 
-To understand this behavior, it might be helpful also to have a basic marble diagram. Marble diagram's are great ways to graphically represent RxJS behavior.
+To understand this behavior, it might be helpful to also have a basic marble diagram. Marble diagram's are great ways to graphically represent RxJS behavior.
 
 Here's a Marble Diagram explained:
 
