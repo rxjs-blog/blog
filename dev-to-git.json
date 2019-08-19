@@ -10,5 +10,9 @@
   {
     "id": 150191,
     "relativePathToArticle": "./blog-posts/takeuntil-takewhile/takeWhile-takeUntil-takeWhat.md"
+  },
+  {
+    "id": 157143,
+    "relativePathToArticle": "./blog-posts/from-promises-to-observables/from-promises-to-observables.md"
   }
 ]
