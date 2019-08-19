@@ -299,7 +299,7 @@ The last operator that was passed into the **pipe** also references a [takeUntil
 
 Also note that I make the observable `null`. This is not necessary, but for the basic example application I wanted to visually show the data disappearing when `clear` was called.
 
-> As a disclaimer here, there are also 100+ other ways to do this same type of event handling. Additional implementations include using **from** to cast promises, **fromFetch** using the `fetch` API, or even an ajax implementation with `rxjsw`. I chose the implementation here because it was easy to follow and I was happy with the output. RxJS is very flexible and gives you the power to control the streams with (almost) any behavior.
+> As a disclaimer here, there are also 100+ other ways to do this same type of event handling. Additional implementations include using **from** to cast promises, **fromFetch** using the `fetch` API, or even an ajax implementation with `rxjs`. I chose the implementation here because it was easy to follow and I was happy with the output. RxJS is very flexible and gives you the power to control the streams with (almost) any behavior.
 
 You can see this code in the `reactive` Angular Component in my project.
 
