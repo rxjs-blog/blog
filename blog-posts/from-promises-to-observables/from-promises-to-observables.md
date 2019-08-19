@@ -204,7 +204,7 @@ I refactored the HTTP calls to be done in one endpoint. If you look in the examp
 
 The code here is pretty straightforward, based on the "source" parameter it makes a call to the matching RSS feed. The results are gathered from the HTTP call and returned in the output value.
 
-Now for the RxJS implementation, I wrapped each of the HTTP calls to this endpoint in a separate observable. This enabled each HTTP call to start at the same time.  As soon as the individual HTTP calls completed, their responses were shown on the page.
+Now for the RxJS implementation, I wrapped each of the HTTP calls to this endpoint in a separate observable. This enabled each HTTP call to start at the same time. As soon as the individual HTTP calls completed, their responses were shown on the page.
 
 ```ts
   load() {
