@@ -202,7 +202,7 @@ I decided that it would help if I could break down the HTTP calls to be handled 
 
 I refactored the HTTP calls to be done in one endpoint. If you look in the example project, you can see this [in the functions/index.js file](https://github.com/andrewevans0102/learning-rxjs-with-angular/blob/master/functions/index.js) here.
 
-The code here is pretty straightforward, based on the "source" parameter it makes a call to to the matching RSS feed. The results are gathered from the HTTP call and returned in the output value.
+The code here is pretty straightforward, based on the "source" parameter it makes a call to the matching RSS feed. The results are gathered from the HTTP call and returned in the output value.
 
 Now for the RxJS implementation, I wrapped each of the HTTP calls to this endpoint in a separate observable. This enabled each call to stream in at the same time, and as soon as results were found they were stored and shown on the page.
 
