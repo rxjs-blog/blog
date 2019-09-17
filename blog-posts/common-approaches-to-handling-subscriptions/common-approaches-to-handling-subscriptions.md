@@ -2,7 +2,7 @@
 published: true
 title: "Common Approaches to Handling Subscriptions"
 cover_image: ""
-description: "This blog article covers the some common approaches to handling Observable subscriptions with RxJS."
+description: "This blog article covers some common approaches to handling Observable subscriptions with RxJS."
 tags: rxjs, javascript, typescript, angular
 series:
 canonical_url:
@@ -16,13 +16,13 @@ Handling this can be a bit tricky. This post is going to cover some common patte
 
 This post is also going to be framework agnostic in an effort to make these patterns accessible by all.
 
-The examples that are used in this post can be reached in my [Stackblitz Project](https://rxjs-example-handle-susbcriptions.stackblitz.io).
+The examples that are used in this post can be reached in my [Stackblitz Project](https://stackblitz.com/edit/rxjs-example-handle-susbcriptions).
 
 I'm going to show the code here, and have an embedded link to my Stackblitz project at the end. I encourage you to run the code examples that I walkthrough to get a better understanding.
 
 ## Memory Leaks and Your First Unsubscribe
 
-When we do not successfully unsubscribe from an Observable, we create a situation called a "memory leak." This is any time a stream is started (using system resources) and not stopped. If you have enough streams started without an "unsubscribe," you can use up a lot of your system resources and eventually bring down your session..._this is not a good thing_.
+When we do not successfully unsubscribe from an Observable, we create a situation called a "memory leak." This is any time a stream is started (using system resources) and not stopped. If you have enough streams started without an "unsubscribe," you can use up a lot of your system resources and significantly slow down your application..._this is not a good thing_.
 
 A good example of this would be a simple Observable from the creation operator `interval`. Consider the following code:
 
@@ -33,7 +33,7 @@ const observable = interval(1000);
 const subscription = observable.subscribe(() => console.log('Hello!'));
 ```
 
-So in this example we are just using the `interval` operator to create a stream that writes "Hello!" to the console every 1 second. When we call `subscribe` we are saying that whenever the stream emits a response (in this case every 1 second), we print "Hello!".
+So in this example we are just using the [interval](https://rxjs.dev/api/index/function/interval) operator to create a stream that writes "Hello!" to the console every 1 second. When we call `subscribe` we are saying that whenever the stream emits a response (in this case every 1 second), we print "Hello!".
 
 This is very simplistic, but the challenge here is that if we do not call `unsubscribe`, this stream will continue running until you end your session or destroy the associated component etc. This is really easy to miss and important for performance.
 
@@ -44,8 +44,13 @@ import { interval } from 'rxjs';
 
 const observable = interval(1000);
 const subscription = observable.subscribe(() => console.log('Hello!'));
-subscription.unsubscribe();
+setTimeout(() => {
+  subscription.unsubscribe();
+  console.log('unsubscribed');
+}, 1000);
 ```
+
+> NOTE: We are using a `setTimeout` here just to allow for a second to pass and the "hello" to be shown in the console.
 
 Now with the "unsubscribe" called, the execution ends correctly and you're successfully managing the stream.
 
@@ -129,46 +134,23 @@ In this example you see that we define an instance of a [Subscription](https://r
 
 This pattern is particularly useful when you have multiple observables in a component that you want to manage together. It makes the implementation cleaner and easier to maintain.
 
-## Using Frameworks and the Angular async pipe
+## Combining Subscriptions with tap and merge
 
-The final pattern I want to mention is using Lifecycle Hooks and builtin mechanisms from different JavaScript frameworks. All of the major frameworks have flavors of these. Angular in particular makes this very easy to show with the `async pipe`.
+In addition to the above example, another common pattern is to make use of the [tap](https://rxjs.dev/api/operators/tap) operator and static [merge](https://rxjs.dev/api/index/function/merge) function to combine multiple observables.
 
-In Angular, the `pipe` is an abstraction that provides data transforms that can be used within an application's components. This means that you can leverage built in functionality to do common behaviors like [formatting date](https://angular.io/api/common/DatePipe) or [parsing JSON](https://angular.io/api/common/JsonPipe).
+Consider the following code:
 
-The `async pipe` is important for RxJS because it can be used to handle streams. In Angular, the `async pipe` handles both the subscription and unsubscription within the template itself.
+```javascript
+// create observables
+const value$ = of(1, 2, 3, 4).pipe(tap(x => console.log(x)));
+const anotherValue$ = of(true).pipe(tap(x => console.log(x)));
 
-A great example of this is when working with the store in [NgRx](https://ngrx.io/).
+const subs = merge(value$, anotherValue$).subscribe();
 
-Consider the following component code:
-
-```typescript
-  activity$: Observable<any[]>;
-  error$: Observable<string>;
-
-  constructor(private store: Store<AppState>) { }
-
-  ngOnInit() {
-    this.activity$ = this.store.pipe(select(selectViewActivity));
-    this.error$ = this.store.pipe(select(selectActivityError));
-  }
+subs.unsubscribe();
 ```
 
-Then in your corresponding template code, you would reference the observable like this:
-
-```typescript
-<div *ngIf="error$ | async as error">
-  <h1 class="error-message"><mat-icon>error</mat-icon> {{ error }}</h1>
-</div>
-<div *ngIf="activity$ | async as activity">
-  <div>activity.value</div>
-</div>
-```
-
-> this code snippet was taken from the application [Overwatch Challenge](https://github.com/andrewevans0102/overwatch-challenge).
-
-In this snippet both the `activity` and `error` streams are being controlled with the `async pipe`. It makes for a really clean implementation because you just reference the instance and the template takes care of the rest.
-
-There are more examples of this kind of behavior and I encourage you to review more on [the NgRx site here](https://ngrx.io/).
+The static [merge](https://rxjs.dev/api/index/function/merge) function enables you to combine many observables into a single value. Then when you are ready to stop execution, a single `unsubscribe` stops execution on the group. This pattern is very clean, and enables RxJS to handle the orchestration of your streams without needing to declare additional operators etc.
 
 ## Closing Thoughts
 
