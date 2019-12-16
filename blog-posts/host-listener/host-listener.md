@@ -1,8 +1,8 @@
 ---
 published: false
-title: "Ain't nobady needs HostListener"
+title: "Ain't nobody needs HostListener"
 cover_image: ""
-description: "In Angular event handling is often implemented using the hostListener decorator, eventhough it might not be the best fit for the problem. Have you consider more composable approaches?"
+description: "In Angular event handling is often implemented using the hostListener decorator, even though it might not be the best fit for the problem. Have you consider more composable approaches?"
 tags: angular, rxjs, javascript, typescript
 series:
 canonical_url:
