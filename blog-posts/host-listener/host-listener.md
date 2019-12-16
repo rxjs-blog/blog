@@ -2,16 +2,16 @@
 published: false
 title: "Ain't nobody needs HostListener"
 cover_image: ""
-description: "In Angular event handling is often implemented using the hostListener decorator, even though it might not be the best fit for the problem. Have you consider more composable approaches?"
+description: "In Angular event handling is often implemented using the hostListener decorator, even though it might not be the best fit for the problem. Have you considered more composable approaches?"
 tags: angular, rxjs, javascript, typescript
 series:
 canonical_url:
 ---
 
-Angular's `@hostListener` is well known within the community. Rather unknown are the problems this might have on runtime performance and general application architecture. In general, there are two main problems with the `hostListener` decorator.
+Angular's `@hostListener` is well known within the community. Rather unknown are the problems this might have on runtime performance and general application architecture. In general, there are three main problems with using the `hostListener` decorator.
 
-1. It's not composable
-2. It can harm performance
+1. Missing composability
+2. Performance issues
 3. Lacks configuration options
 
 Before tackling those two problems more in detail, let's have a look at the example code used to demonstrate the problem.
@@ -25,11 +25,11 @@ Here we see an implemented drag'n'drop feature, using the `@hostListener` decora
 
 Let's have a more in-depth look at the problems listed above.
 
-### HostListener is not composable
+### Missing composability
 
 Taking a look into the code, we will notice that we set the property `isClicked` to `true` as soon as the `mousedown` event happens. We use that property to perform an early return inside of the `mousemove` event handler to stop this function from execution. This is the only way we can compose those two events, which is quite expensive because this `mousemove` function is still executed with every mouse movement. In terms of composition, this drag'n'drop feature is fairly straight forward. There are several much more complex event composition scenarios, which become extremely difficult when using the `@hostListener` decorator.  
 
-### HostListener harms performance
+### Performance issues
 
 This problem is mostly the resolution of the missing composability. The problem here is that we register the 3 event listener, mentioned above, for every component instance, even though it's impossible to drag'n'drop multiple rectangles at the same time. Therefore what we should aim for is, that only the `mousedown` event listener is registered for every component and just when this event happens we register the other events accordingly. Doing all this logic within the event listener function is a lot of work and also decently complex. Additionally, there is currently no way to disable a registers `@hostListener` function. This is also the reason why the code example above constantly listens to mouse move events, even though they are not relevant if there isn't a rectangle selected before. 
 
