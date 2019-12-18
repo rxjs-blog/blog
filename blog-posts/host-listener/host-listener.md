@@ -72,7 +72,7 @@ If you want to understand the used operators you can have a look at the followin
 
 ## Summary
 
-The `@hostListener` decorator is handy if we just want to listen to single events and don't rely on any kind of composition. Everything that involves a certain event composition should be implemented by using one of the other approaches listed above. In general, `@hostListener` lacks features that are necessary when dealing with event composition. It completly misses *cancellation* options and any kind of *composability*. Those features are crucial when building heavily event oriented features.
+The `@hostListener` decorator is handy if we just want to listen to single events and don't rely on any kind of composition. Everything that involves a certain event composition should be implemented by using one of the other approaches listed above. In general, `@hostListener` lacks features that are necessary when dealing with event composition. It completely misses *cancellation* options and any kind of *composability*. Those features are crucial when building heavily event-oriented features.
 When you are used to RxJS you should probably use the `fromEvent` operator to perform any kind of complex event handling. If RxJS is not your preferred technology, maybe using plain old `addEventListener` might be a viable option for you.
 
 ## Disclaimer
