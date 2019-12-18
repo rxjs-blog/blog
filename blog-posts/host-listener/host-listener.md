@@ -19,8 +19,10 @@ To do so let's have a look at the following Stackblitz example, particularly the
 
 {% stackblitz angular-hostlistener-imperative file=src%2Fapp%2Fbox.component.ts %}
 
-Here we see an implemented drag'n'drop feature, using the `@hostListener` decorator. In total, we registered 3 listeners. - A `mousedown` event, which we are using to set a property signalling that our drag'n'drop is about to start. Afterwards,- A `mousemove` event, which calculates the position of the rectangle according to the mouse position.
-- Finally, we are using the `mouseup` event to signal that our drag'n'drop has ended.
+Here we see an implemented drag'n'drop feature, using the `@hostListener` decorator. In total, we registered 3 listeners.
+ - A `mousedown` event, which we are using to set a property signalling that our drag'n'drop is about to start.
+ - A `mousemove` event, which calculates the position of the rectangle according to the mouse position.
+ - Finally, we are using the `mouseup` event to signal that our drag'n'drop has ended.
 
 Do note that we used `document` as eventTarget. We needed that to handle fast mouse movements which might be out of sync with the position of the rectangle. One will notice that when moving the mouse very fast, that one is out of the rectangle element, which would stop our drag'n'drop.
 
