@@ -14,5 +14,9 @@
   {
     "id": 157143,
     "relativePathToArticle": "./blog-posts/from-promises-to-observables/from-promises-to-observables.md"
+  },
+  {
+    "id": 222715,
+    "relativePathToArticle": "./blog-posts/host-listener/host-listener.md"
   }
 ]
