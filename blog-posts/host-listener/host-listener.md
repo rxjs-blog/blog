@@ -17,7 +17,7 @@ Angular's `@hostListener` is well known within the community. Rather unknown are
 Before tackling those two problems more in detail, let's have a look at the example code used to demonstrate the problem.
 To do so let's have a look at the following Stackblitz example, particularly the `BoxComponent`: 
 
-{% stackblitz angular-hostlistener-imperative file=src/app/box.component.ts %}
+{% stackblitz angular-hostlistener-imperative file=src%2Fapp%2Fbox.component.ts %}
 
 Here we see an implemented drag'n'drop feature, using the `@hostListener` decorator. In total, we registered 3 listeners. - A `mousedown` event, which we are using to set a property signalling that our drag'n'drop is about to start. Afterwards,- A `mousemove` event, which calculates the position of the rectangle according to the mouse position.
 - Finally, we are using the `mouseup` event to signal that our drag'n'drop has ended.
@@ -53,7 +53,7 @@ We have two different approaches to tackle the problems described above. Dependi
 
 Theoretically one could register nested event listeners. Therefore we could use the `addEventListener` function to register the event listeners.
 
-{% stackblitz angular-hostlistener-eventlistener file=src/app/box.component.ts %}
+{% stackblitz angular-hostlistener-eventlistener file=src%2Fapp%2Fbox.component.ts %}
 
 Looking at the code example one will notice that this is fairly complex. Especially because we need to take care of registering and unregistering the nested event listeners. Even if all of the problems described above can be solved with this approach, In my personal opinion, I think that this is a very complex and hard to understand solution. 
 
@@ -62,7 +62,7 @@ Looking at the code example one will notice that this is fairly complex. Especia
 
 The second alternative approach would be using the RxJS [`fromEvent`](https://rxjs.dev/api/index/function/fromEvent) operator. RxJS shines when it comes to composition of event-oriented code. 
 
-{% stackblitz angular-hostlistener-reactive file=src/app/box.component.ts %}
+{% stackblitz angular-hostlistener-reactive file=src%2Fapp%2Fbox.component.ts %}
 
 Having a look at this code, one will notice that just looking at the lines of code that this is the smallest approach. I have to admit that one needs to be familiar with RxJS to understand and write such code. It's not really intuitive, but therefore RxJS takes care of registering and unregistering the event listener for us. Additionally, we have many more opportunities regarding composability. That's one of the key benefits of using RxJS when dealing with event-oriented code. 
 
