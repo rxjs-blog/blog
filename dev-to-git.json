@@ -18,5 +18,9 @@
   {
     "id": 222715,
     "relativePathToArticle": "./blog-posts/host-listener/host-listener.md"
+  },
+  {
+    "id": 287244,
+    "relativePathToArticle": "./blog-posts/consumer-driven-contract-testing/cdc-testing.md"
   }
 ]
